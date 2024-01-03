@@ -8,30 +8,13 @@ import os
 import shutil
 
 __author__ = "Zennith Boerger"
-__version__ = "0.1.3"
+__version__ = "0.1.0"
 __license__ = "MIT"
 
-# Total enemy count including invalid/test enemies (not currently utilized)
-_ENEMYCOUNT = 18028
-# IDs to ignore so that no shenanigans happen like Mr Masochist replacing a boss
-_IGNORED_IDS = ['15363', # Mr. Masochist 
-                '17186', # Masato Arakawa
-                '15435', # Ishioda Wrecking Ball
-                '15603', # Normal Majima
-                '15604', # Normal Saejima
-                '15620', # Ch.13 Sawashiro
-                '15640', # Normal Kiryu
-                '15647', # Ryo Aoki
-                '15210', # Clara-chan fight
-                '17621', '17829', # Right Arm of Cleaning Robots
-                '17622', '17830', # Left Arm of Cleaning Robots 
-                '17828', '15216', # Cleaning Robots
-                '17990', # True Final Millenium Tower Amon
-                '17991', # Summoned Majima
-                '17992', # Summoned Saejima
-                '17993', # Summoned Kiryu
-                '16532', '16522' # Placeholder party members
-                ]
+# Total enemy count including invalid/test enemies (not currently utilized) TODO update with new total Enemy count
+_ENEMYCOUNT = 0
+# IDs to ignore so that no shenanigans happen like Mr Masochist replacing a boss TODO Update with IDs that cannot be randomized for y8
+_IGNORED_IDS = []
 
 # Enemy class for storing enemies throughout the file
 class Enemy:
@@ -54,13 +37,13 @@ def get_id(enemy):
         return -1
     return int(enemy.base_id)
 
-# This function utilizes a naive method of scaling enemies by simply
+# This function utilizes a naive method of scaling enemies by simply TODO Replace Invested_vagabonds with IDs of similar enemy types in y8
 # copying the stats from the original enemy to the enemy replacing it.
 # there is additional logic for dealing with Invested Vagabonds but for the most part
 # this is how the scaling works
 def scale_enemy(soldier, soldier_data, scale_enemy_id, scale_vagabonds):
     stat_names = ['mission', 'group', 'npc_list', 'encounter_kind', 'hp', 'enemy_level', 'exp_point', 'money_point', 'money_drop_ratio', 'job_exp_point', 'attack', 'defence', 'dodge', 'accuracy', 'mp', 'sp_attack', 'base_wait']
-    invested_vagabonds = ['17203', '17989', '17205', '17204', '15701', '15971']
+    invested_vagabonds = []
     soldier.scale_id = scale_enemy_id
     soldier.scaled_stats = soldier.stats.copy()
     same_level_enemies = []
@@ -186,7 +169,7 @@ def reassign_ids(soldiers, randomized):
         soldiers[soldiers.index(soldier)].base_id = soldier.scale_id
     return soldiers
 
-# We generate the statblocks for each scaled enemy here. Although a lot of hard-coding is involved to match formatting, 
+# We generate the statblocks for each scaled enemy here. Although a lot of hard-coding is involved to match formatting, TODO replace magic numbers applicable to y8 data
 # it makes the file look good. The scale_id and scaled_stats parameters for the Enemy object are used here, and the code 
 # is easily readable despite containing many if and for statements. Look for the function explanation of scale_enemy for 
 # more information.
@@ -214,6 +197,7 @@ def generate_statblock(index_list, soldier_data, randomized, scale_vagabonds):
         enemy_blocks[enemy.name + str(enemy.scale_id)] = enemy_block
     return enemy_blocks
 
+# TODO Replace Ushio index with 1st starting enemy if necessary
 def shuffle_enemies(valid_soldiers, bosses, boss_weight, seed_value=None):
     random.seed(seed_value)
     randomized = valid_soldiers.copy()
@@ -246,7 +230,7 @@ def shuffle_enemies(valid_soldiers, bosses, boss_weight, seed_value=None):
 
     return valid_soldiers, randomized.copy()
 
-# Now we process soldiers to filter out all test/invalid enemies (enemies who have 0 hp in the files)
+# Now we process soldiers to filter out all test/invalid enemies (enemies who have 0 hp in the files) TODO
 # We also keep track of what indexes are "valid" indexes for future processing as well
 def filter_soldiers(soldiers, index_list):
     soldier_data = []
@@ -269,7 +253,7 @@ def filter_soldiers(soldiers, index_list):
                 bosses.append(s)
     return valid_soldiers, soldier_data, bosses
 
-# We process the JSON file to retrieve the base_id, name, and stats of the current enemy, such as True 
+# We process the JSON file to retrieve the base_id, name, and stats of the current enemy, such as True  TODO
 # Final Millenium Tower Amon (base_id = '17790', name = 'yazawa_sfm_boss_amon', stats = Lots of stuff).
 def parse_enemies(parser):
     soldiers = []
@@ -292,7 +276,7 @@ def parse_enemies(parser):
             current_enemy.stats[key] = value
     return soldiers,index_list
 
-# We need to store our current location to generate the RMM folder structure where the .exe
+# We need to store our current location to generate the RMM folder structure where the .exe TODO
 # was run from, since the .exe uses the root's temp folder for processing.
 def open_data_file():
     current_directory = os.getcwd()

@@ -10,7 +10,7 @@ from tkinter import messagebox
 from tktooltip import ToolTip
 
 __author__ = "Zennith Boerger"
-__version__ = "0.1.3"
+__version__ = "0.1.0"
 __license__ = "MIT"
 
 scale_vagabonds_value = 1
@@ -31,7 +31,7 @@ def randomize(progress, status):
              'Generating Statblocks', 
              'Reassigning Enemy IDs', 
              'Generating Randomized File', 
-             'Generating RMM Compatible Directory']
+             'Generating SRMM Compatible Directory']
 
     try:
         import Randomizer as ra
