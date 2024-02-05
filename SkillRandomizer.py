@@ -9,17 +9,8 @@ import os
 import shutil
 import time
 
-_SKILL_AMOUNT = 1750
-_IGNORED_IDS = [243, # Tenacious Fist,
-                1140, # Guard Order
-                757, # Unleash Hell
-                763, # Blasphemous Ritual
-                853, # Foreman Demolish skill
-                852, # Honey Hunt
-                851, # Freelancer Treasure Hunt
-                1175, # Summon Bandmate
-                1503, 131, 508, 717, 722, 757, 760, 762, 800, 804, 1170, 1175, 1316, 1156, # Call Backup
-                1255, 1254, 1253, 1252, 1251, 1250 # All Tag Team moves except Essence of Mayham
+_SKILL_AMOUNT = 2746
+_IGNORED_IDS = [960, 1078, 1325, 1326, 1461, 1462, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1470, 1471, 1472, 1473, 1474, 1475, 1476, 1572, 2517, 2519, 2521 #Tag Team Skills
                 ]
 
 class Skill:
@@ -50,11 +41,16 @@ def parse_skills(f):
         skill = Skill('', '', {}, {})
         objects = ijson.items(f, str(skill_id))
         for stat in objects:
+            print("Skill ID = " + str(skill_id) + ": \n")
             skill.id = skill_id
             skill.name = list(stat.keys())[0]
-            data = str(stat[list(stat.keys())[0]]).replace("'", "\"").replace("Decimal(\"", "").replace("\")", "").replace("True", "true").replace("False", "false").replace(", ", ",")
-            data = data.replace('""We Are the Globe""', '"\\"We Are the Globe\\""').replace('""Scar Me""', '"\\"Scar Me\\""').replace('""Relax""', '"\\"Relax\\""').replace('""Your Wackiest Dreams""', '"\\"Your Wackiest Dreams\\""').replace('""Endless Desire""', '"\\"Endless Desire\\""').replace('""Those Who Protect""', '"\\"Those Who Protect\\""').replace('""Be My Shelter""', '"\\"Be My Shelter\\""')
+            """replace(": '", ": \"").replace("',", '\",')"""
+            data = str(stat[list(stat.keys())[0]]).replace("'", '"').replace("Decimal(\"", "").replace("\")", "").replace("True", "true").replace("False", "false")
+            data = data.replace('""Lights, camera, traction!"', '"\\"Lights, camera, traction!\\"')
+            print(data + '\n\n')
+            # data = data.replace('""We Are the Globe""', '"\\"We Are the Globe\\""').replace('""Scar Me""', '"\\"Scar Me\\""').replace('""Relax""', '"\\"Relax\\""').replace('""Your Wackiest Dreams""', '"\\"Your Wackiest Dreams\\""').replace('""Endless Desire""', '"\\"Endless Desire\\""').replace('""Those Who Protect""', '"\\"Those Who Protect\\""').replace('""Be My Shelter""', '"\\"Be My Shelter\\""')
             skill.stats = json.loads(data)
+            #print("This didn't fail")
             skill.new_stats = skill.stats.copy()
         skills.append(skill)
     f.close()
@@ -114,8 +110,8 @@ def generate_JSON(skills_list):
         end_comma = ",\n"
         if i == _SKILL_AMOUNT - 1:
              end_comma = "\n"
-        data = str(skills_list[i].stats).replace("'", "\"").replace("Decimal(\"", "").replace("\")", "").replace("True", "true").replace("False", "false")#.replace(", ", ",")
-        data = data.replace('""We Are the Globe""', '"\\"We Are the Globe\\""').replace('""Scar Me""', '"\\"Scar Me\\""').replace('""Relax""', '"\\"Relax\\""').replace('""Your Wackiest Dreams""', '"\\"Your Wackiest Dreams\\""').replace('""Endless Desire""', '"\\"Endless Desire\\""').replace('""Those Who Protect""', '"\\"Those Who Protect\\""').replace('""Be My Shelter""', '"\\"Be My Shelter\\""')
+        data = str(skills_list[i].stats).replace("'", '"').replace("Decimal(\"", "").replace("\")", "").replace("True", "true").replace("False", "false")
+        data = data.replace('""Lights, camera, traction!"', '"\\"Lights, camera, traction!\\"')
         data = data.replace('true Grit', 'True Grit')
         data = '"' + str(skills_list[i].name) + "\": {\n      " + data[1:]
         data = data[:-1] + "\n    }\n  }"
@@ -130,8 +126,8 @@ def repackage():
 
 def generate_RMM(current_directory, seed):
     seeded_name = f'Skill Randomizer seed - {seed}/'
-    seeded_name = os.path.join(seeded_name, 'db.yazawa.en/')
-    seeded_name = os.path.join(seeded_name, 'en/')
+    seeded_name = os.path.join(seeded_name, 'db.elvis.en/')
+    # seeded_name = os.path.join(seeded_name, 'en/')
     current_directory = os.path.join(current_directory, seeded_name)
     os.makedirs(current_directory)
     shutil.copy(os.path.join(sys._MEIPASS, r"rpg_skill.bin"), os.path.join(current_directory, r"rpg_skill.bin"))
