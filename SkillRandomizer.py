@@ -8,21 +8,22 @@ import msvcrt as m
 import os
 import shutil
 import time
+import skill_data
 
 _SKILL_AMOUNT = 2746
-_IGNORED_IDS = [960, 1078, 1325, 1326, 1461, 1462, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1470, 1471, 1472, 1473, 1474, 1475, 1476, 1572, 2517, 2519, 2521 #Tag Team Skills
+_IGNORED_IDS = [960, 1078, 1325, 1326, 1461, 1462, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1470, 1471, 1472, 1473, 1474, 1475, 1476, 1572, 2517, 2519, 2521, #Tag Team Skills
+                1285, 256 # Trenchcoat harraser moves
                 ]
 
-class Skill:
-    def __init__(self, id, name, stats, new_stats):
-        self.id = id
-        self.name = name
-        self.stats = stats
-        self.new_stats = new_stats
-    def copy(self):
-        obj = type(self).__new__(self.__class__)
-        obj.__dict__.update(self.__dict__)
-        return obj
+# class Skill:
+#     def __init__(self, id, name, stats):
+#         self.id = id
+#         self.name = name
+#         self.stats = stats
+#     def copy(self):
+#         obj = type(self).__new__(self.__class__)
+#         obj.__dict__.update(self.__dict__)
+#         return obj
 
 # We need to store our current location to generate the RMM folder structure where the .exe
 # was run from, since the .exe uses the root's temp folder for processing.
@@ -33,27 +34,27 @@ def open_data_file():
 
 
 def parse_skills(f):
-    skills = []
-    for skill_id in range(_SKILL_AMOUNT):
-        # if ((skill_id/_SKILL_AMOUNT) * 100) % 10 == 0:
-        #     print(str((skill_id/_SKILL_AMOUNT) * 100) + "% Complete")
-        f.seek(0)
-        skill = Skill('', '', {}, {})
-        objects = ijson.items(f, str(skill_id))
-        for stat in objects:
-            print("Skill ID = " + str(skill_id) + ": \n")
-            skill.id = skill_id
-            skill.name = list(stat.keys())[0]
-            """replace(": '", ": \"").replace("',", '\",')"""
-            data = str(stat[list(stat.keys())[0]]).replace("'", '"').replace("Decimal(\"", "").replace("\")", "").replace("True", "true").replace("False", "false")
-            data = data.replace('""Lights, camera, traction!"', '"\\"Lights, camera, traction!\\"')
-            print(data + '\n\n')
-            # data = data.replace('""We Are the Globe""', '"\\"We Are the Globe\\""').replace('""Scar Me""', '"\\"Scar Me\\""').replace('""Relax""', '"\\"Relax\\""').replace('""Your Wackiest Dreams""', '"\\"Your Wackiest Dreams\\""').replace('""Endless Desire""', '"\\"Endless Desire\\""').replace('""Those Who Protect""', '"\\"Those Who Protect\\""').replace('""Be My Shelter""', '"\\"Be My Shelter\\""')
-            skill.stats = json.loads(data)
-            #print("This didn't fail")
-            skill.new_stats = skill.stats.copy()
-        skills.append(skill)
-    f.close()
+    # skills = []
+    # for skill_id in range(_SKILL_AMOUNT):
+    #     # if ((skill_id/_SKILL_AMOUNT) * 100) % 10 == 0:
+    #     #     print(str((skill_id/_SKILL_AMOUNT) * 100) + "% Complete")
+    #     f.seek(0)
+    #     skill = Skill('', '', {})
+    #     objects = ijson.items(f, str(skill_id))
+    #     for stat in objects:
+    #         print("Skill ID = " + str(skill_id) + ": \n")
+    #         skill.id = skill_id
+    #         skill.name = list(stat.keys())[0]
+    #         """replace(": '", ": \"").replace("',", '\",')"""
+    #         data = str(stat[list(stat.keys())[0]]).replace("'", '"').replace("Decimal(\"", "").replace("\")", "").replace("True", "true").replace("False", "false")
+    #         data = data.replace('""Lights, camera, traction!"', '"\\"Lights, camera, traction!\\"')
+    #         print(data + '\n\n')
+    #         # data = data.replace('""We Are the Globe""', '"\\"We Are the Globe\\""').replace('""Scar Me""', '"\\"Scar Me\\""').replace('""Relax""', '"\\"Relax\\""').replace('""Your Wackiest Dreams""', '"\\"Your Wackiest Dreams\\""').replace('""Endless Desire""', '"\\"Endless Desire\\""').replace('""Those Who Protect""', '"\\"Those Who Protect\\""').replace('""Be My Shelter""', '"\\"Be My Shelter\\""')
+    #         skill.stats = json.loads(data)
+    #         #print("This didn't fail")
+    #     skills.append(skill)
+    # f.close()
+    skills = skill_data.skills
     return skills
 
 def shuffle_skills(skills, seed_value=None):
@@ -62,14 +63,13 @@ def shuffle_skills(skills, seed_value=None):
     for skill in skills:
         mp_cost_og.append(skill.stats['need_heat'])
 
-
     valid_skills = []
     valid_skills_indexes = []
     for skill in skills:
-        if skill.stats['reARMP_isValid'] == '1' and 'name' in skill.stats and skill.stats['category'] != 11 and skill.stats['use_cond'] != 30 and _IGNORED_IDS.count(skill.id) == 0:
+        if skill.stats['reARMP_isValid'] == '1' and 'name' in skill.stats and skill.stats['category'] != 11 and skill.stats['use_cond'] != 30 and _IGNORED_IDS.count(int(skill.id)) == 0 and skill.stats['category'] != 8:
             valid_skills.append(skill.copy())
             valid_skills_indexes.append(skill.id)
-        
+
     random.shuffle(valid_skills)
     return mp_cost_og,valid_skills,valid_skills_indexes
 
@@ -77,7 +77,7 @@ def get_skills_list(skills, valid_skills, valid_skills_indexes, mp_cost_og, empt
     skills_list = []
 
     for i in range(_SKILL_AMOUNT):
-        if valid_skills_indexes.count(i) != 0:
+        if valid_skills_indexes.count(str(i)) != 0:
             next_skill = valid_skills.pop()
             skills_list.append(next_skill)
         else:
