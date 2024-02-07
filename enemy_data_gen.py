@@ -9,7 +9,7 @@ class Enemy:
         self.id = id
         self.name = name
         self.stats = stats
-    def __copy__(self):
+    def copy(self):
         obj = type(self).__new__(self.__class__)
         obj.__dict__.update(self.__dict__)
         return obj
@@ -42,7 +42,7 @@ print("Done Parsing.")
 
 file_write = open(r'enemy_data.py', r'w', encoding="utf8")
 
-file_write.write("class Enemy:\n\tdef __init__(self, id, name, stats):\n\t\tself.id = id\n\t\tself.name = name\n\t\tself.stats = stats\n\tdef __copy__(self):\n\t\tobj = type(self).__new__(self.__class__)\n\t\tobj.__dict__.update(self.__dict__)\n\t\treturn obj\n\n")
+file_write.write("class Enemy:\n\tdef __init__(self, id, name, stats):\n\t\tself.id = id\n\t\tself.name = name\n\t\tself.stats = stats\n\tdef copy(self):\n\t\tobj = type(self).__new__(self.__class__)\n\t\tobj.__dict__.update(self.__dict__)\n\t\treturn obj\n\n")
 file_write.write("enemy0 = [\n\t")
 enemy_lists = []
 for i in range(_ENEMYCOUNT):
