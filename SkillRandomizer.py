@@ -15,16 +15,6 @@ _IGNORED_IDS = [960, 1078, 1325, 1326, 1461, 1462, 1463, 1464, 1465, 1466, 1467,
                 1285, 256 # Trenchcoat harraser moves
                 ]
 
-# class Skill:
-#     def __init__(self, id, name, stats):
-#         self.id = id
-#         self.name = name
-#         self.stats = stats
-#     def copy(self):
-#         obj = type(self).__new__(self.__class__)
-#         obj.__dict__.update(self.__dict__)
-#         return obj
-
 # We need to store our current location to generate the RMM folder structure where the .exe
 # was run from, since the .exe uses the root's temp folder for processing.
 def open_data_file():
@@ -131,15 +121,3 @@ def generate_RMM(current_directory, seed):
     current_directory = os.path.join(current_directory, seeded_name)
     os.makedirs(current_directory)
     shutil.copy(os.path.join(sys._MEIPASS, r"rpg_skill.bin"), os.path.join(current_directory, r"rpg_skill.bin"))
-    # os.remove(r'rpg_skill.json')
-
-# seed = random.randrange(sys.maxsize)
-# random.seed(seed)
-
-# current_directory, file = open_data_file()
-# skills = parse_skills(file)
-# mp_cost, valid_skills, valid_skills_indexes = shuffle_skills(skills, seed)
-# skills_list = get_skills_list(skills, valid_skills, valid_skills_indexes, mp_cost)
-# generate_JSON(skills_list)
-# repackage()
-# generate_RMM(current_directory, seed)
