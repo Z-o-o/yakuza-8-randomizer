@@ -49,13 +49,12 @@ def randomize(progress, status):
         if randomize_enemies_value:
             steps = ['Processing Enemies', 
                 'Shuffling Enemies', 
-                'Generating Statblocks', 
-                'Reassigning Enemy IDs', 
+                'Generating Enemy List', 
                 'Generating Randomized File', 
                 'Generating RMM Compatible Directory']
             enemy_rando(progress, status, steps, current_directory, scale_vagabonds_value, seed_value, boss_chance, ra)
         if randomize_skills_value:
-            steps = ['Processing Skills (this can take awhile)', 
+            steps = ['Processing Skills', 
                 'Shuffling Skills', 
                 'Generating Skills List', 
                 'Generating Randomized File', 
@@ -94,33 +93,58 @@ def skill_rando(progress, status, steps, current_directory, seed_value, sa):
     root.update()
 
 def enemy_rando(progress, status, steps, current_directory, scale_vagabonds_value, seed_value, boss_chance, ra):
-    increase_progress(progress, status, steps, 0)
-    root.update()
+    # increase_progress(progress, status, steps, 0)
+    # root.update()
 
-    parser = ra.open_data_file()
-    soldiers, index_list = ra.parse_enemies(parser)
-    valid_soldiers, soldier_data, bosses = ra.filter_soldiers(soldiers, index_list)
+    # parser = ra.open_data_file()
+    # soldiers, index_list = ra.parse_enemies(parser)
+    # valid_soldiers, soldier_data, bosses = ra.filter_soldiers(soldiers, index_list)
+    # increase_progress(progress, status, steps, 1)
+    # root.update()
+
+    # valid_soldiers, randomized = ra.shuffle_enemies(valid_soldiers, bosses, boss_chance, int(seed_value))
+    # increase_progress(progress, status, steps, 2)
+    # root.update()
+
+    # enemy_blocks = ra.generate_statblock(index_list, soldier_data, randomized, scale_vagabonds_value)
+    # increase_progress(progress, status, steps, 3)
+    # root.update()
+
+    # soldiers = ra.reassign_ids(soldiers, randomized).copy()
+    # increase_progress(progress, status, steps, 4)
+    # root.update()
+
+    # ra.generate_json(soldiers, enemy_blocks)
+    # ra.repackage()
+    # increase_progress(progress, status, steps, 5)
+    # root.update()
+
+    # ra.generate_RMM_directory(current_directory, int(seed_value))
+    # increase_progress(progress, status, steps, len(steps))
+    # root.update()
+
+    # increase_progress(progress, status, steps, 0)
+    # root.update()
+    # AWDASAFEWD - Cutoff - 
+    ra.open_data_file()
+    enemies = ra.parse_enemies()
     increase_progress(progress, status, steps, 1)
     root.update()
 
-    valid_soldiers, randomized = ra.shuffle_enemies(valid_soldiers, bosses, boss_chance, int(seed_value))
+    valid_enemies, valid_enemy_indexes = ra.shuffle_enemies(enemies, int(seed_value))
     increase_progress(progress, status, steps, 2)
     root.update()
 
-    enemy_blocks = ra.generate_statblock(index_list, soldier_data, randomized, scale_vagabonds_value)
+    enemy_list = ra.get_enemy_list(enemies, valid_enemies, valid_enemy_indexes)
     increase_progress(progress, status, steps, 3)
     root.update()
 
-    soldiers = ra.reassign_ids(soldiers, randomized).copy()
+    ra.generate_JSON(enemy_list)
+    ra.repackage()
     increase_progress(progress, status, steps, 4)
     root.update()
 
-    ra.generate_json(soldiers, enemy_blocks)
-    ra.repackage()
-    increase_progress(progress, status, steps, 5)
-    root.update()
-
-    ra.generate_RMM_directory(current_directory, int(seed_value))
+    ra.generate_RMM(current_directory, int(seed_value))
     increase_progress(progress, status, steps, len(steps))
     root.update()
 
