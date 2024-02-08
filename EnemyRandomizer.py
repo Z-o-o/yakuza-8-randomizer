@@ -60,12 +60,37 @@ def shuffle_enemies(enemies, seed_value=None):
 def get_enemy_list(enemies, valid_enemies, valid_enemy_indexes):
     enemy_list = []
 
+    scales = ["mission",
+              "group",
+              "enemy_level", 
+              "hp_ratio", 
+              "hp", "mp", 
+              "attack", "defence", "sp_attack", "sp_def", 
+              "dodge", "accuracy", "base_wait", 
+              "exp_point", "job_exp_point", "money_point", "money_drop_ratio", 
+              "first_wait_ratio",
+              "enemy_level_2",
+              "hp_ratio_2",
+              "exp_point_2",
+              "job_exp_point_2",
+              "enemy_level_3",
+              "hp_ratio_3",
+              "exp_point_3",
+              "job_exp_point_3"]
+
     for i in range(_ENEMY_AMOUNT):
         if valid_enemy_indexes.count(str(i)) != 0:
             next_enemy = valid_enemies.pop()
-            enemy_list.append(next_enemy)
+            enemy_list.append(next_enemy.copy())
         else:
-            enemy_list.append(enemies[i])
+            enemy_list.append(enemies[i].copy())
+
+    for enemy in enemy_list:
+        enemy.stats = enemy.stats.copy()
+
+    for i in range(len(enemy_list)):
+        for scale in scales:
+            enemy_list[i].stats[scale] = enemies[i].stats[scale]
 
     return enemy_list
 

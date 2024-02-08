@@ -17,6 +17,7 @@ randomize_enemies_value = 1
 randomize_skills_value = 1
 scale_vagabonds_value = 1
 seed_value = ''
+current_directory = os.getcwd()
 
 def set_value(field, value):
     field = value
@@ -28,7 +29,6 @@ def percentageCalculator(x, y):
     
 def randomize(progress, status):
 
-    current_directory = os.getcwd()
     randomize_enemies_value = bool(randomize_enemies.get())
     randomize_skills_value = bool(randomize_skills.get())
 
@@ -93,39 +93,6 @@ def skill_rando(progress, status, steps, current_directory, seed_value, sa):
     root.update()
 
 def enemy_rando(progress, status, steps, current_directory, scale_vagabonds_value, seed_value, boss_chance, ra):
-    # increase_progress(progress, status, steps, 0)
-    # root.update()
-
-    # parser = ra.open_data_file()
-    # soldiers, index_list = ra.parse_enemies(parser)
-    # valid_soldiers, soldier_data, bosses = ra.filter_soldiers(soldiers, index_list)
-    # increase_progress(progress, status, steps, 1)
-    # root.update()
-
-    # valid_soldiers, randomized = ra.shuffle_enemies(valid_soldiers, bosses, boss_chance, int(seed_value))
-    # increase_progress(progress, status, steps, 2)
-    # root.update()
-
-    # enemy_blocks = ra.generate_statblock(index_list, soldier_data, randomized, scale_vagabonds_value)
-    # increase_progress(progress, status, steps, 3)
-    # root.update()
-
-    # soldiers = ra.reassign_ids(soldiers, randomized).copy()
-    # increase_progress(progress, status, steps, 4)
-    # root.update()
-
-    # ra.generate_json(soldiers, enemy_blocks)
-    # ra.repackage()
-    # increase_progress(progress, status, steps, 5)
-    # root.update()
-
-    # ra.generate_RMM_directory(current_directory, int(seed_value))
-    # increase_progress(progress, status, steps, len(steps))
-    # root.update()
-
-    # increase_progress(progress, status, steps, 0)
-    # root.update()
-    # AWDASAFEWD - Cutoff - 
     ra.open_data_file()
     enemies = ra.parse_enemies()
     increase_progress(progress, status, steps, 1)
