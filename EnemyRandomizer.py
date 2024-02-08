@@ -11,7 +11,7 @@ import time
 import enemy_data
 
 _ENEMY_AMOUNT = 5047
-_IGNORED_IDS = [
+_IGNORED_IDS = [1689, 3947, # Ink Sac
                 ]
 
 # We need to store our current location to generate the RMM folder structure where the .exe
