@@ -12,6 +12,7 @@ import enemy_data
 
 _ENEMY_AMOUNT = 5047
 _IGNORED_IDS = ['1689', '3947', # Ink Sac
+                '1848', '4531', '4532' # Sujimon 3 starters
                 ]
 
 # We need to store our current location to generate the RMM folder structure where the .exe
@@ -91,7 +92,7 @@ def get_enemy_list(enemies, valid_enemies, valid_enemy_indexes):
 
     for i in range(len(enemy_list)):
         # TODO
-        if enemy_list[i].stats['sujimon_id'] == 0:
+        if enemy_list[i].stats['no_sujimon'] == 1:
             enemy_list[i].stats['no_sujimon'] == 0
             enemy_list[i].stats['sujimon_id'] == 384
         for scale in scales:
