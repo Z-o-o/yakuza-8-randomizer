@@ -11,7 +11,7 @@ import time
 import enemy_data
 
 _ENEMY_AMOUNT = 5047
-_IGNORED_IDS = [1689, 3947, # Ink Sac
+_IGNORED_IDS = ['1689', '3947', # Ink Sac
                 ]
 
 # We need to store our current location to generate the RMM folder structure where the .exe
@@ -50,7 +50,7 @@ def shuffle_enemies(enemies, seed_value=None):
     valid_enemies = []
     valid_enemy_indexes = []
     for enemy in enemies:
-        if enemy.stats['reARMP_isValid'] == '1' and _IGNORED_IDS.count(int(enemy.id)) == 0:
+        if enemy.stats['reARMP_isValid'] == '1' and _IGNORED_IDS.count(enemy.id) == 0:
             valid_enemies.append(enemy.copy())
             valid_enemy_indexes.append(enemy.id)
 
@@ -88,7 +88,12 @@ def get_enemy_list(enemies, valid_enemies, valid_enemy_indexes):
     for enemy in enemy_list:
         enemy.stats = enemy.stats.copy()
 
+
     for i in range(len(enemy_list)):
+        # TODO
+        if enemy_list[i].stats['sujimon_id'] == 0:
+            enemy_list[i].stats['no_sujimon'] == 0
+            enemy_list[i].stats['sujimon_id'] == 384
         for scale in scales:
             enemy_list[i].stats[scale] = enemies[i].stats[scale]
 
