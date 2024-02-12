@@ -102,7 +102,7 @@ def enemy_rando(progress, status, steps, current_directory, scale_vagabonds_valu
     increase_progress(progress, status, steps, 2)
     root.update()
 
-    enemy_list = ra.get_enemy_list(enemies, valid_enemies, valid_enemy_indexes)
+    enemy_list = ra.get_enemy_list(enemies, valid_enemies, valid_enemy_indexes, boss_chance)
     increase_progress(progress, status, steps, 3)
     root.update()
 
