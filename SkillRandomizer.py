@@ -12,7 +12,7 @@ import skill_data
 
 _SKILL_AMOUNT = 2746
 _IGNORED_IDS = [960, 1078, 1325, 1326, 1461, 1462, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1470, 1471, 1472, 1473, 1474, 1475, 1476, 1572, 2517, 2519, 2521, #Tag Team Skills
-                1285, 256 # Trenchcoat harraser moves
+                1285, 1286, 1287, 253, 254, 255, 256 # Trenchcoat harraser moves
                 ]
 
 # We need to store our current location to generate the RMM folder structure where the .exe
@@ -78,6 +78,19 @@ def get_skills_list(skills, valid_skills, valid_skills_indexes, mp_cost_og, empt
             skills_list[i].stats['need_heat'] = 0
         if mp_cost_og[i] > 0 and skills_list[i].stats['need_heat'] == 0:
             skills_list[i].stats['need_heat'] = random.randrange(5, 70)
+
+    for skill in skills_list:
+        skill.stats = skill.stats.copy()
+
+    for skill in skills_list:
+        if skill.stats['icon_pattern_id'] < 33:
+            skill.stats['ui_category'] = 1
+        elif skill.stats['icon_pattern_id'] > 32 and skill.stats['icon_pattern_id'] < 52:
+            skill.stats['ui_category'] = 3
+            skill.stats["attribute"] = 0
+        else:
+            skill.stats['ui_category'] = 2
+            skill.stats["attribute"] = 0
 
     if empty_explain:
         for skill in skills_list:
