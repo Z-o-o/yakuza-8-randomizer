@@ -85,7 +85,7 @@ def get_skills_list(skills, valid_skills, valid_skills_indexes, mp_cost_og, empt
     for skill in skills_list:
         if skill.stats['icon_pattern_id'] < 33:
             skill.stats['ui_category'] = 1
-        elif skill.stats['icon_pattern_id'] > 32 and skill.stats['icon_pattern_id'] < 52:
+        elif skill.stats['icon_pattern_id'] > 32 and skill.stats['icon_pattern_id'] < 52 or skill.stats['icon_pattern_id'] > 58:
             skill.stats['ui_category'] = 3
             skill.stats["attribute"] = 0
         else:
