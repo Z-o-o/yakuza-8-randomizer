@@ -16,7 +16,8 @@ _IGNORED_IDS = ['1689', '3947', # Ink Sac
                 '1632', '1686', # Giant Shark/Squid
                 '1717', '1708', # Support Bryce
                 '1820', # Ebina 1st phase
-                '1870', '1992' # Sojimaru
+                '1870', '1992', # Sojimaru
+                '4754' # Jo Amon intended loss
                 ]
 bosses = []
 
@@ -69,10 +70,13 @@ def shuffle_enemies(enemies, seed_value=None):
         '1547', # Takada
         '1686', # Giant Squid
         '1719', '1720', # Bryce
-        '4757' # Ebina
+        '4757' # Ebina Sword Phase
         '1446', '1445' # Excavators
         '1977', '1978', # Komaki and Chau Ka Long
-        '3338', '3341', '3343', '3342', '3344', '3345' # The Robo Michios
+        '3338', '3341', '3343', '3342', '3344', '3345', # The Robo Michios
+        '3357', # Utamaru
+        '1912', # UFO Sojimaru
+        '3362', '3363', '3364', '3361'  # Amons (Kazuya, Jiro, Sango, Jo)
     ]
 
     valid_enemies = []
