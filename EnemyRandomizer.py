@@ -55,30 +55,34 @@ def shuffle_enemies(enemies, seed_value=None):
     random.seed(seed_value)
 
     boss_ids = [
-        '1017', '1884', '1885', '1886', # Asakura
+        # '1006', # Sasaki
+        # '1009', # Tanaka
+        # '1017', '1884', '1885', '1886', # Asakura
         '1067', # Seiryu Ch. 1 Long Battle Boss - Kuwaki
-        '1075', # Tomizawa
+        # '1075', # Tomizawa
         '1081', '1226', '1255', '1325', '1381', '4559', # Yamai
         '1097', '4140', # Roman
-        '1104', # Jose
+        # '1104', # Jose
         '1150', '1552', '1559', # Dwight
         '1238', # Wong Tou
         '1406', '1407', '1408', '1409', # Sawashiro
-        '1482', # Daigo
-        '1480', # Majima
-        '1481', # Saejima
-        '1518', # Narasaki
-        '1547', # Takada
+        # '1482', # Daigo
+        # '1480', # Majima
+        # '1481', # Saejima
+        '1509', # Arai (Ch.12 Long battle)
+        # '1504', # Makino (Ch.12 Long battle)
+        # '1518', # Narasaki
+        # '1547', # Takada
         '1686', # Giant Squid
         '1719', '1720', # Bryce
-        '4757', # Ebina Sword Phase
-        '1446', '1445', # Excavators
-        '1977', # Komaki
-        '1978', # Chau Ka Long
-        '3338', '3341', '3343', '3342', '3344', '3345', # The Robo Michios
-        '3357', # Utamaru
-        '1912', # UFO Sojimaru
-        '3362', '3363', '3364', '3361'  # Amons (Kazuya, Jiro, Sango, Jo)
+        # '4757', # Ebina Sword Phase
+        # '1446', '1445', # Excavators
+        # '1977', # Komaki
+        # '1978', # Chau Ka Long
+        # '3338', '3341', '3343', '3342', '3344', '3345', # The Robo Michios
+        # '3357', # Utamaru
+        # '1912', # UFO Sojimaru
+        # '3362', '3363', '3364', '3361'  # Amons (Kazuya, Jiro, Sango, Jo)
     ]
 
     valid_enemies = []
@@ -115,17 +119,54 @@ def get_enemy_list(enemies, valid_enemies, valid_enemy_indexes, boss_weight):
               "hp_ratio_3",
               "exp_point_3",
               "job_exp_point_3"]
+    
+    boss_names = {}
+    boss_names.update(dict.fromkeys(['1017', '1884', '1885', '1886'], 'Asakura'))
+    boss_names.update(dict.fromkeys(['1081', '1226', '1255', '1325', '1381', '4559'], 'Yamai'))
+    boss_names.update(dict.fromkeys(['1097', '4140'], 'Roman'))
+    boss_names.update(dict.fromkeys(['1150', '1552', '1559'], 'Dwight'))
+    boss_names.update(dict.fromkeys(['1406', '1407', '1408', '1409'], 'Sawashiro'))
+    boss_names.update(dict.fromkeys(['1719', '1720'], 'Bryce'))
+    boss_names.update(dict.fromkeys(['1446', '1445'], 'Excavators'))
+    boss_names.update(dict.fromkeys(['3338', '3341', '3343', '3342', '3344', '3345'], 'Robo Michio'))
+    boss_names.update(dict.fromkeys(['3362', '3363', '3364', '3361'], 'Amon'))
+    boss_names['1067'] = 'Kuwaki'
+    boss_names['1075'] = 'Tomizawa'
+    boss_names['1104'] = 'Jose'
+    boss_names['1238'] = 'Wong'
+    boss_names['1482'] = 'Daigo'
+    boss_names['1480'] = 'Majima'
+    boss_names['1481'] = 'Saejima'
+    boss_names['1518'] = 'Narasaki'
+    boss_names['1547'] = 'Takada'
+    boss_names['1686'] = 'Giant Squid'
+    boss_names['4757'] = 'Ebina'
+    boss_names['1977'] = 'Komaki'
+    boss_names['1978'] = 'Chau Ka Long'
+    boss_names['3357'] = 'Utamaru'
+    boss_names['1912'] = 'UFO Sujimaru'
+    boss_names['1509'] = 'Arai'
+    boss_names['1006'] = 'Sasaki'
+    boss_names['1009'] = 'Tanaka'
+    boss_names['1504'] = 'Makino'
+    # boss_names['3362'] = 'Kazuya Amon'
+    # boss_names['3363'] = 'Jiro Amon'
+    # boss_names['3364'] = 'Sango Amon'
+    # boss_names['3361'] = 'Jo Amon'
 
     bosses_copy = bosses.copy()
     for i in range(_ENEMY_AMOUNT):
         if len(bosses_copy) == 0:
+            # print('OUTTA BOSSES, RECHARGING\n')
             bosses_copy = bosses.copy()
         if valid_enemy_indexes.count(str(i)) != 0:
             next_enemy = None
             if random.randint(1, 100) <= boss_weight:
                 next_enemy = bosses_copy.pop(random.randrange(-1, len(bosses_copy) - 1))
-                for b in bosses_copy:
-                    if b.stats['name'] == next_enemy.stats['name']:
+                # print("\nWE GOT BOSS: " + boss_names[next_enemy.id])
+                for b in bosses_copy.copy():
+                    if boss_names[b.id].__eq__(boss_names[next_enemy.id]):
+                        # print("REMOVING: " + boss_names[b.id])
                         bosses_copy.pop(bosses_copy.index(b))
             else:
                 next_enemy = valid_enemies.pop()
