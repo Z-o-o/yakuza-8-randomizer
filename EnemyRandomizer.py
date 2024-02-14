@@ -122,7 +122,7 @@ def get_enemy_list(enemies, valid_enemies, valid_enemy_indexes, boss_weight):
             bosses_copy = bosses.copy()
         if valid_enemy_indexes.count(str(i)) != 0:
             next_enemy = None
-            if random.randint(0, 100) <= boss_weight:
+            if random.randint(1, 100) <= boss_weight:
                 next_enemy = bosses_copy.pop(random.randrange(-1, len(bosses_copy) - 1))
                 for b in bosses_copy:
                     if b.stats['name'] == next_enemy.stats['name']:
