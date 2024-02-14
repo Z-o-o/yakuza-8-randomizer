@@ -54,10 +54,9 @@ def parse_enemies():
 def shuffle_enemies(enemies, seed_value=None):
     random.seed(seed_value)
 
-    # ADD SUBSTORY BOSSES
     boss_ids = [
-        '1017', '1884', '1885', '1886' # Asakura
-        '1067', # Seiryu Ch. 1 Long Battle Boss
+        '1017', '1884', '1885', '1886', # Asakura
+        '1067', # Seiryu Ch. 1 Long Battle Boss - Kuwaki
         '1075', # Tomizawa
         '1081', '1226', '1255', '1325', '1381', '4559', # Yamai
         '1097', '4140', # Roman
@@ -65,14 +64,17 @@ def shuffle_enemies(enemies, seed_value=None):
         '1150', '1552', '1559', # Dwight
         '1238', # Wong Tou
         '1406', '1407', '1408', '1409', # Sawashiro
-        '1482', '1480', '1481', '1483', '1484', # Daigo, Majima, and Saejima
+        '1482', # Daigo
+        '1480', # Majima
+        '1481', # Saejima
         '1518', # Narasaki
         '1547', # Takada
         '1686', # Giant Squid
         '1719', '1720', # Bryce
-        '4757' # Ebina Sword Phase
-        '1446', '1445' # Excavators
-        '1977', '1978', # Komaki and Chau Ka Long
+        '4757', # Ebina Sword Phase
+        '1446', '1445', # Excavators
+        '1977', # Komaki
+        '1978', # Chau Ka Long
         '3338', '3341', '3343', '3342', '3344', '3345', # The Robo Michios
         '3357', # Utamaru
         '1912', # UFO Sojimaru
@@ -122,6 +124,9 @@ def get_enemy_list(enemies, valid_enemies, valid_enemy_indexes, boss_weight):
             next_enemy = None
             if random.randint(0, 100) <= boss_weight:
                 next_enemy = bosses_copy.pop(random.randrange(-1, len(bosses_copy) - 1))
+                for b in bosses_copy:
+                    if b.stats['name'] == next_enemy.stats['name']:
+                        bosses_copy.pop(bosses_copy.index(b))
             else:
                 next_enemy = valid_enemies.pop()
             enemy_list.append(next_enemy.copy())
