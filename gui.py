@@ -15,7 +15,6 @@ __license__ = "MIT"
 
 randomize_enemies_value = 1
 randomize_skills_value = 1
-scale_vagabonds_value = 1
 seed_value = ''
 current_directory = os.getcwd()
 
@@ -36,7 +35,6 @@ def randomize(progress, status):
         messagebox.showinfo('Error', "You didn't select either randomization option.")
         return
     
-    scale_vagabonds_value = bool(scale_vagabonds.get())
     seed_value = seed.get()
     boss_chance = int(boss_weight.get())
     if seed_value == '':
@@ -52,7 +50,7 @@ def randomize(progress, status):
                 'Generating Enemy List', 
                 'Generating Randomized File', 
                 'Generating RMM Compatible Directory']
-            enemy_rando(progress, status, steps, current_directory, scale_vagabonds_value, seed_value, boss_chance, ra)
+            enemy_rando(progress, status, steps, current_directory, seed_value, boss_chance, ra)
         if randomize_skills_value:
             steps = ['Processing Skills', 
                 'Shuffling Skills', 
@@ -92,7 +90,7 @@ def skill_rando(progress, status, steps, current_directory, seed_value, sa):
     increase_progress(progress, status, steps, len(steps))
     root.update()
 
-def enemy_rando(progress, status, steps, current_directory, scale_vagabonds_value, seed_value, boss_chance, ra):
+def enemy_rando(progress, status, steps, current_directory, seed_value, boss_chance, ra):
     ra.open_data_file()
     enemies = ra.parse_enemies()
     increase_progress(progress, status, steps, 1)
@@ -146,11 +144,7 @@ ent.pack(side=TOP, fill=X)
 root.iconbitmap(os.path.join(sys._MEIPASS, 'logo.ico'))
 
 row = Frame(root)
-scale_vagabonds = IntVar(master=root, value=1)
-ent = Checkbutton(root, text='Scale Vagabonds', variable=scale_vagabonds, onvalue=1, offvalue=0)
 row.pack(side=TOP, fill=X, padx=5, pady=5)
-ent.pack(side=TOP, fill=X)
-ToolTip(ent, msg="Scale Vagabonds to what level they spawn (no level 80 vagabonds giving you 30 levels at level 12).")
 
 empty_explain = IntVar(master=root, value=0)
 ent = Checkbutton(root, text='Empty skill descriptions', variable=empty_explain, onvalue=1, offvalue=0)

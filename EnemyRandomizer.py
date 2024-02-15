@@ -183,11 +183,11 @@ def get_enemy_list(enemies, valid_enemies, valid_enemy_indexes, boss_weight):
         for scale in scales:
             enemy_list[i].stats[scale] = enemies[i].stats[scale]
 
-    # for enemy in enemy_list:
-    #     if enemy.stats['call_enemy_id'] != 0:
-    #         for e in enemy_list:
-    #             if e.stats['enemy_level'] > (enemy.stats['enemy_level'] - 3) and e.stats['enemy_level'] < (enemy.stats['enemy_level'] + 1):
-    #                 enemy.stats['call_enemy_id'] == int(e.id)
+    for enemy in enemy_list:
+        if enemy.stats['call_enemy_id'] != 0:
+            for e in enemy_list:
+                if e.stats['enemy_level'] > (enemy.stats['enemy_level'] - 3) and e.stats['enemy_level'] < (enemy.stats['enemy_level'] + 1):
+                    enemy.stats['call_enemy_id'] == int(e.id)
 
     return enemy_list
 
@@ -219,9 +219,12 @@ def repackage():
     EnemyreARMP.rebuildFile()
 
 def generate_RMM(current_directory, seed):
-    seeded_name = f'Enemy Randomizer seed - {seed}/'
-    seeded_name = os.path.join(seeded_name, 'db.elvis.en/')
-    # seeded_name = os.path.join(seeded_name, 'en/')
-    current_directory = os.path.join(current_directory, seeded_name)
-    os.makedirs(current_directory)
-    shutil.copy(os.path.join(sys._MEIPASS, r"character_npc_soldier_personal_data.bin"), os.path.join(current_directory, r"character_npc_soldier_personal_data.bin"))
+    languages = [r'de', r'en', r'es', r'fr', r'it', r'ja', r'ko', r'pt', r'ru', r'zh', r'zhs']
+    for lang in languages:
+        seeded_name = f'Enemy Randomizer seed - {seed}/'
+        lang_directory = current_directory
+        seeded_name = os.path.join(seeded_name, f'db.elvis.{lang}/')
+        # seeded_name = os.path.join(seeded_name, 'en/')
+        lang_directory = os.path.join(lang_directory, seeded_name)
+        os.makedirs(lang_directory)
+        shutil.copy(os.path.join(sys._MEIPASS, r"character_npc_soldier_personal_data.bin"), os.path.join(lang_directory, r"character_npc_soldier_personal_data.bin"))
