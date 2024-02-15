@@ -19,8 +19,6 @@ _IGNORED_IDS = [960, 1078, 1325, 1326, 1461, 1462, 1463, 1464, 1465, 1466, 1467,
 # was run from, since the .exe uses the root's temp folder for processing.
 def open_data_file():
     os.chdir(sys._MEIPASS)
-    file = open(r'rpg_skill.bin.json', r'r', encoding="utf8")
-    return file
 
 
 def parse_skills():
