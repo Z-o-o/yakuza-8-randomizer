@@ -1,18 +1,13 @@
-Ones I'm missing:
-
-- Yamai Eiji
-- Yamai Flaming Crowbar QTE
-- Dwight Shark QTE
-
-Ones I got:
-
-- Kuwaki QTE
-- Yamai Serious Swing QTE
-- Yamai Hostess Transition
-- Roman QTE
-- Dwight Bull QTE
-- Dwight Grenade Launcher QTE
-- Wong QTE
-- Sawashiro Can QTE
-- Arai QTE
-- Bryce Gun Transition
+- Yamai Eiji - hacts\eb1550_boss_yam_btled.par
+- Yamai Flaming Crowbar QTE - hacts\eb1640_yam_snake.par
+- Dwight Shark QTE - hacts\eb1910_dwt_shark_attack.par
+- Kuwaki QTE - hacts\eb1530_boss_counter_1vs3.par
+- Yamai Serious Swing QTE - hacts\eb1625_yam_cab_counter_ed.par
+- Yamai Hostess Transition - hacts\eb1620_yam_cab_counter.par
+- Roman QTE - hacts\eb1520_boss_coun_1vs1.par
+- Dwight Bull QTE - hacts\eb1580_boss_dwt_bull.par
+- Dwight Grenade Launcher - hacts\eb1890_dwt_gas.par
+- Wong QTE - hacts\eb1600_boss_won_weaponb.par
+- Sawashiro Can QTE - hacts\eb1660_saw_cane.par
+- Arai QTE - hacts\es4250_tojyo_katana.par
+- Bryce Gun Transition - hacts\eb1940_brc_change.par

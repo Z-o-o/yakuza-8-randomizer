@@ -55,34 +55,34 @@ def shuffle_enemies(enemies, seed_value=None):
     random.seed(seed_value)
 
     boss_ids = [
-        # '1006', # Sasaki
-        # '1009', # Tanaka
-        # '1017', '1884', '1885', '1886', # Asakura
+        '1006', # Sasaki
+        '1009', # Tanaka
+        '1017', '1884', '1885', '1886', # Asakura
         '1067', # Seiryu Ch. 1 Long Battle Boss - Kuwaki
-        # '1075', # Tomizawa
+        '1075', # Tomizawa
         '1081', '1226', '1255', '1325', '1381', '4559', # Yamai
         '1097', '4140', # Roman
-        # '1104', # Jose
+        '1104', # Jose
         '1150', '1552', '1559', # Dwight
         '1238', # Wong Tou
         '1406', '1407', '1408', '1409', # Sawashiro
-        # '1482', # Daigo
-        # '1480', # Majima
-        # '1481', # Saejima
+        '1482', # Daigo
+        '1480', # Majima
+        '1481', # Saejima
         '1509', # Arai (Ch.12 Long battle)
-        # '1504', # Makino (Ch.12 Long battle)
-        # '1518', # Narasaki
-        # '1547', # Takada
+        '1504', # Makino (Ch.12 Long battle)
+        '1518', # Narasaki
+        '1547', # Takada
         '1686', # Giant Squid
         '1719', '1720', # Bryce
-        # '4757', # Ebina Sword Phase
-        # '1446', '1445', # Excavators
-        # '1977', # Komaki
-        # '1978', # Chau Ka Long
-        # '3338', '3341', '3343', '3342', '3344', '3345', # The Robo Michios
-        # '3357', # Utamaru
-        # '1912', # UFO Sojimaru
-        # '3362', '3363', '3364', '3361'  # Amons (Kazuya, Jiro, Sango, Jo)
+        '4757', # Ebina Sword Phase
+        '1446', '1445', # Excavators
+        '1977', # Komaki
+        '1978', # Chau Ka Long
+        '3338', '3341', '3343', '3342', '3344', '3345', # The Robo Michios
+        '3357', # Utamaru
+        '1912', # UFO Sojimaru
+        '3362', '3363', '3364', '3361'  # Amons (Kazuya, Jiro, Sango, Jo)
     ]
 
     valid_enemies = []

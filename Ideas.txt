@@ -6,5 +6,6 @@
 9. Option to add more/less amons
 
 - use Authedit to randomize what characters appear in main menu
+- use Authedit to fix Boss QTEs from moving player and boss around map (potential softlocks)
 
 8. Utilize Dummy_all and/or Dummy_Dungeon to do a 7 party member mod? - this idea might require .exe editing, but who knows
