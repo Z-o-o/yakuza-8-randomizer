@@ -23,7 +23,7 @@ def open_data_file():
     return file
 
 
-def parse_skills(f):
+def parse_skills():
     # skills = []
     # for skill_id in range(_SKILL_AMOUNT):
     #     # if ((skill_id/_SKILL_AMOUNT) * 100) % 10 == 0:
