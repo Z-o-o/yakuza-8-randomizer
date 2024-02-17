@@ -12,7 +12,8 @@ import skill_data
 
 _SKILL_AMOUNT = 2746
 _IGNORED_IDS = [960, 1078, 1325, 1326, 1461, 1462, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1470, 1471, 1472, 1473, 1474, 1475, 1476, 1572, 2517, 2519, 2521, 1510, #Tag Team Skills
-                1285, 1286, 1287, 253, 254, 255, 256 # Trenchcoat harraser moves
+                1285, 1286, 1287, 253, 254, 255, 256, # Trenchcoat harraser moves
+                2741, 2740, 2742 # Jima Resurgences
                 ]
 
 # We need to store our current location to generate the RMM folder structure where the .exe
