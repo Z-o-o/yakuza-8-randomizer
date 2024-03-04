@@ -5,6 +5,5 @@
 
 - use Authedit to randomize what characters appear in main menu
 - use Authedit to fix Boss QTEs from moving player and boss around map (potential softlocks)
-- Revamp support randomizing to only randomize to other supports
 - Disable or fix Smackdown to not softlock against boss HP gated enemies
 - Give every skill a description
