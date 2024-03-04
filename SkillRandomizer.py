@@ -13,7 +13,7 @@ import skill_data
 _SKILL_AMOUNT = 2746
 _IGNORED_IDS = [960, 1078, 1325, 1326, 1461, 1462, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1470, 1471, 1472, 1473, 1474, 1475, 1476, 1572, 2517, 2519, 2521, 1510, #Tag Team Skills
                 1285, 1286, 1287, 253, 254, 255, 256, # Trenchcoat harraser moves
-                2741, 2740, 2742 # Jima Resurgences
+                1637 # Core Depleted! Recharging!
                 ]
 
 # We need to store our current location to generate the RMM folder structure where the .exe
@@ -23,26 +23,6 @@ def open_data_file():
 
 
 def parse_skills():
-    # skills = []
-    # for skill_id in range(_SKILL_AMOUNT):
-    #     # if ((skill_id/_SKILL_AMOUNT) * 100) % 10 == 0:
-    #     #     print(str((skill_id/_SKILL_AMOUNT) * 100) + "% Complete")
-    #     f.seek(0)
-    #     skill = Skill('', '', {})
-    #     objects = ijson.items(f, str(skill_id))
-    #     for stat in objects:
-    #         print("Skill ID = " + str(skill_id) + ": \n")
-    #         skill.id = skill_id
-    #         skill.name = list(stat.keys())[0]
-    #         """replace(": '", ": \"").replace("',", '\",')"""
-    #         data = str(stat[list(stat.keys())[0]]).replace("'", '"').replace("Decimal(\"", "").replace("\")", "").replace("True", "true").replace("False", "false")
-    #         data = data.replace('""Lights, camera, traction!"', '"\\"Lights, camera, traction!\\"')
-    #         print(data + '\n\n')
-    #         # data = data.replace('""We Are the Globe""', '"\\"We Are the Globe\\""').replace('""Scar Me""', '"\\"Scar Me\\""').replace('""Relax""', '"\\"Relax\\""').replace('""Your Wackiest Dreams""', '"\\"Your Wackiest Dreams\\""').replace('""Endless Desire""', '"\\"Endless Desire\\""').replace('""Those Who Protect""', '"\\"Those Who Protect\\""').replace('""Be My Shelter""', '"\\"Be My Shelter\\""')
-    #         skill.stats = json.loads(data)
-    #         #print("This didn't fail")
-    #     skills.append(skill)
-    # f.close()
     skills = skill_data.skills
     return skills
 

@@ -15,7 +15,6 @@ _IGNORED_IDS = ['1689', '3947', # Ink Sac
                 '1848', '4531', '4532', # Sujimon 3 starters
                 '1632', '1686', # Giant Shark/Squid
                 '1717', '1708', # Support Bryce
-                '1820', # Ebina 1st phase
                 '1870', '1992', # Sojimaru
                 '4754' # Jo Amon intended loss
                 ]
@@ -28,26 +27,6 @@ def open_data_file():
 
 
 def parse_enemies():
-    # skills = []
-    # for skill_id in range(_ENEMY_AMOUNT):
-    #     # if ((skill_id/_ENEMY_AMOUNT) * 100) % 10 == 0:
-    #     #     print(str((skill_id/_ENEMY_AMOUNT) * 100) + "% Complete")
-    #     f.seek(0)
-    #     skill = Skill('', '', {})
-    #     objects = ijson.items(f, str(skill_id))
-    #     for stat in objects:
-    #         print("Skill ID = " + str(skill_id) + ": \n")
-    #         skill.id = skill_id
-    #         skill.name = list(stat.keys())[0]
-    #         """replace(": '", ": \"").replace("',", '\",')"""
-    #         data = str(stat[list(stat.keys())[0]]).replace("'", '"').replace("Decimal(\"", "").replace("\")", "").replace("True", "true").replace("False", "false")
-    #         data = data.replace('""Lights, camera, traction!"', '"\\"Lights, camera, traction!\\"')
-    #         print(data + '\n\n')
-    #         # data = data.replace('""We Are the Globe""', '"\\"We Are the Globe\\""').replace('""Scar Me""', '"\\"Scar Me\\""').replace('""Relax""', '"\\"Relax\\""').replace('""Your Wackiest Dreams""', '"\\"Your Wackiest Dreams\\""').replace('""Endless Desire""', '"\\"Endless Desire\\""').replace('""Those Who Protect""', '"\\"Those Who Protect\\""').replace('""Be My Shelter""', '"\\"Be My Shelter\\""')
-    #         skill.stats = json.loads(data)
-    #         #print("This didn't fail")
-    #     skills.append(skill)
-    # f.close()
     enemies = enemy_data.enemies
     return enemies
 
@@ -75,7 +54,7 @@ def shuffle_enemies(enemies, seed_value=None):
         '1547', # Takada
         '1686', # Giant Squid
         '1719', '1720', # Bryce
-        '4757', # Ebina Sword Phase
+        '1820', '4757', # Ebina
         '1446', '1445', # Excavators
         '1977', # Komaki
         '1978', # Chau Ka Long
@@ -130,6 +109,7 @@ def get_enemy_list(enemies, valid_enemies, valid_enemy_indexes, boss_weight):
     boss_names.update(dict.fromkeys(['1446', '1445'], 'Excavators'))
     boss_names.update(dict.fromkeys(['3338', '3341', '3343', '3342', '3344', '3345'], 'Robo Michio'))
     boss_names.update(dict.fromkeys(['3362', '3363', '3364', '3361'], 'Amon'))
+    boss_names.update(dict.fromkeys(['4757', '1820'], 'Ebina'))
     boss_names['1067'] = 'Kuwaki'
     boss_names['1075'] = 'Tomizawa'
     boss_names['1104'] = 'Jose'
@@ -149,10 +129,6 @@ def get_enemy_list(enemies, valid_enemies, valid_enemy_indexes, boss_weight):
     boss_names['1006'] = 'Sasaki'
     boss_names['1009'] = 'Tanaka'
     boss_names['1504'] = 'Makino'
-    # boss_names['3362'] = 'Kazuya Amon'
-    # boss_names['3363'] = 'Jiro Amon'
-    # boss_names['3364'] = 'Sango Amon'
-    # boss_names['3361'] = 'Jo Amon'
 
     bosses_copy = bosses.copy()
     for i in range(_ENEMY_AMOUNT):
@@ -228,3 +204,4 @@ def generate_RMM(current_directory, seed):
         lang_directory = os.path.join(lang_directory, seeded_name)
         os.makedirs(lang_directory)
         shutil.copy(os.path.join(sys._MEIPASS, r"character_npc_soldier_personal_data.bin"), os.path.join(lang_directory, r"character_npc_soldier_personal_data.bin"))
+        shutil.copy(os.path.join(sys._MEIPASS, r"battle_rpg_enemy.bin"), os.path.join(lang_directory, r"battle_rpg_enemy.bin"))
