@@ -16,9 +16,40 @@ _IGNORED_IDS = ['1689', '3947', # Ink Sac
                 '1632', '1686', # Giant Shark/Squid
                 '1717', '1708', # Support Bryce
                 '1870', '1992', # Sojimaru
-                '4754' # Jo Amon intended loss
+                '4754', # Jo Amon intended loss
+                '11', # Nathan
+                '12', # Gondawara
+                '13', # Bony Kashiwa
+                '14', # Charlie
+                '15', # Chitose Buster Holmes
+                '16', # Pocket Circuit Fighter
+                '17', # Mameoka
+                '3213', # Eiji no PC
+                '1082', # Eiji PC
+                '1363', # Yamai
+                '1887', # Asakura
+                '1829', # Majima
+                '1830', # Saejima
+                '1831' # Dojima 
                 ]
 bosses = []
+supports = []
+support_ids = [
+        '11', # Nathan
+        '12', # Gondawara
+        '13', # Bony Kashiwa
+        '14', # Charlie
+        '15', # Chitose Buster Holmes
+        '16', # Pocket Circuit Fighter
+        '17', # Mameoka
+        '3213', # Eiji no PC
+        '1082', # Eiji PC
+        '1363', # Yamai
+        '1887', # Asakura
+        '1829', # Majima
+        '1830', # Saejima
+        '1831' # Dojima 
+]
 
 # We need to store our current location to generate the RMM folder structure where the .exe
 # was run from, since the .exe uses the root's temp folder for processing.
@@ -70,10 +101,14 @@ def shuffle_enemies(enemies, seed_value=None):
         if enemy.stats['reARMP_isValid'] == '1' and _IGNORED_IDS.count(enemy.id) == 0:
             valid_enemies.append(enemy.copy())
             valid_enemy_indexes.append(enemy.id)
-        if boss_ids.count(enemy.id) != 0:
+        if boss_ids.count(enemy.id) > 0:
             new_enemy = enemy.copy()
             new_enemy.stats = enemy.stats.copy()
             bosses.append(new_enemy)
+        if support_ids.count(enemy.id) > 0:
+            new_enemy = enemy.copy()
+            new_enemy.stats = enemy.stats.copy()
+            supports.append(new_enemy)
 
     random.shuffle(valid_enemies)
     return valid_enemies,valid_enemy_indexes
@@ -135,7 +170,12 @@ def get_enemy_list(enemies, valid_enemies, valid_enemy_indexes, boss_weight):
         if len(bosses_copy) == 0:
             # print('OUTTA BOSSES, RECHARGING\n')
             bosses_copy = bosses.copy()
-        if valid_enemy_indexes.count(str(i)) != 0:
+        if support_ids.count(str(i)) > 0:
+            replacement_index = random.randrange(-1, len(supports) - 1)
+            while supports[replacement_index].id == str(i):
+                replacement_index = random.randrange(-1, len(supports) - 1)
+            enemy_list.append(supports.pop(replacement_index).copy())
+        elif valid_enemy_indexes.count(str(i)) > 0:
             next_enemy = None
             if random.randint(1, 100) <= boss_weight:
                 next_enemy = bosses_copy.pop(random.randrange(-1, len(bosses_copy) - 1))
