@@ -7,3 +7,4 @@
 - use Authedit to fix Boss QTEs from moving player and boss around map (potential softlocks)
 - Disable or fix Smackdown to not softlock against boss HP gated enemies
 - Give every skill a description
+- Fix Boss QTEs
