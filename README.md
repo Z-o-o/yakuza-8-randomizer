@@ -4,7 +4,7 @@ A modification for Like A Dragon: Infinite Wealth (A.K.A Yakuza 8) that randomiz
 # A Warning on Stability/Balancing:
 This version (1.1) is mostly stable, the main story is completable, substories have not been tested.
 
-Due to the unpredictable nature of randomizers, there can't be a guarentee on balancing. Enemies are balanced to what level they appear at, however summons can be unpredictable and of course skills that are randomized can also be too strong/too weak as well. You've been warned!!!
+Due to the unpredictable nature of randomizers, there can't be a guarentee on balancing or stability. Enemies are balanced to what level they appear at, however summons can be unpredictable and of course skills that are randomized can also be too strong/too weak as well. You've been warned!!!
 
 **AVOID** Interacting with sujimon, they have been lightly tested and they are very unstable. If you see the oppurtunity to catch a sujimon I would recommend avoiding at all costs *UNLESS* you are Ichiban and are walking through Hawaii.
 
