@@ -2,7 +2,7 @@
 A modification for Like A Dragon: Infinite Wealth (A.K.A Yakuza 8) that randomizes enemies and skills through the game.
 
 # A Warning on Stability/Balancing:
-This version (1.0) is mostly stable, the main story is completable, substories have not been tested.
+This version (1.1) is mostly stable, the main story is completable, substories have not been tested.
 
 Due to the unpredictable nature of randomizers, there can't be a guarentee on balancing. Enemies are balanced to what level they appear at, however summons can be unpredictable and of course skills that are randomized can also be too strong/too weak as well. You've been warned!!!
 

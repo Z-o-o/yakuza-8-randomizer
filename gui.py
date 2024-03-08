@@ -10,7 +10,7 @@ from tkinter import messagebox
 from tktooltip import ToolTip
 
 __author__ = "Zennith Boerger"
-__version__ = "1.0"
+__version__ = "1.1"
 __license__ = "MIT"
 
 randomize_enemies_value = 1
