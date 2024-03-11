@@ -8,3 +8,4 @@
 - Disable or fix Smackdown to not softlock against boss HP gated enemies
 - Give every skill a description
 - Fix Boss QTEs
+- Add option to only randomize enemy skills and player skills
