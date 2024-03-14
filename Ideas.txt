@@ -9,3 +9,4 @@
 - Give every skill a description
 - Fix Boss QTEs
 - Add option to only randomize enemy skills and player skills
+- Change Skill MP costs, seems to be a bit too harsh
